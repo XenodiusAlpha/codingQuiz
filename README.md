@@ -62,3 +62,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Deployment Link
 
+https://xenodiusalpha.github.io/codingQuiz/
