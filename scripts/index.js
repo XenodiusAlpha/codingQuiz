@@ -17,6 +17,7 @@ let endGameBlockEL = document.getElementById("endGameBlock");
 let scoresListEl = document.getElementById("scoresList");
 let viewHighScoresEl = document.getElementById("viewHighScores");
 
+// function to start the quiz
 function startQuiz(){
     promptData();
     countdownTimer();
@@ -32,6 +33,7 @@ function promptData(){
 
     answers.innerHTML = '';
     
+    //looping through question bank to populate
     for (let i = 0; i < currentQuestions.option.length; i++) {
         let choice = currentQuestions.option[i];
         let buttonChoices = document.createElement('button');
@@ -42,9 +44,9 @@ function promptData(){
     }
 }
 
+// function toe check the answer clicked with the question bank
 function checkAnswer (event){
     let buttonClick = event.target;
-    // fix logic to handle no choice being click
     // Click on the wrong button
     if(buttonClick.value !== questions[currentIndex].answer){
         // Send a message that it's wrong
@@ -61,17 +63,16 @@ function checkAnswer (event){
         results.setAttribute('class', 'result hide');
     }, 1000);
     currentIndex++;
-    // We need to check if timer is out or not
 
+    // check to see if at end of question bank to see if needing to prompt data or to end game
     if (currentIndex === questions.length) {
-       // add end function
-       console.log('end')
        endGame();
       } else {
         promptData();
       }
 }
 
+// function for the countdowm timer
 function countdownTimer() {
     var timeInterval = setInterval(function () {
         timeLeft--;
@@ -82,8 +83,9 @@ function countdownTimer() {
       }
       timerEl.textContent = `Time: ${timeLeft}`;
     }, 1000);
-  }
+}
 
+// function for the end of the game page
 function endGame() {
     timerEl.textContent = `Time: ${timeLeft}`;
     quizBlockEl.classList.add("displayNone");
@@ -91,6 +93,7 @@ function endGame() {
     finalScoreEl.textContent = `Your final score is ${timeLeft}`;
 }
 
+// function for the high scores page
 function highScore() {
     startScreenEL.classList.add("displayNone");
     navHeaderEL.classList.add("displayNone");
@@ -103,8 +106,8 @@ function highScore() {
     }
 }
 
+// function for the go back button
 function returnToGame() {
-    console.log("btn works");
     quizBlockEl.classList.add("displayNone");
     startScreenEL.classList.remove("displayNone");
     navHeaderEL.classList.remove("displayNone");
@@ -112,6 +115,7 @@ function returnToGame() {
     resetVariables();
 }
 
+// function to reset the variables
 function resetVariables() {
     timeLeft = 75;
     timerEl.textContent = `Time: ${timeLeft}`;
@@ -119,18 +123,22 @@ function resetVariables() {
     results.textContent = "";
 }
 
+// function to save high scores to local storage
 function saveHighScore() {
     localStorage.setItem("userInitials", initialsEl.value);
     localStorage.setItem("hiScore", timeLeft);
     highScore();
 }
 
+// function to clear the high scores from the local storage and from the high score page
 function clearHighScores() {
     localStorage.removeItem("userInitials");
     localStorage.removeItem("hiScore");
     scoresListEl.textContent = "No high scores.";
 }
 
+
+// handling the click events for the various buttons
 viewHighScoresEl.onclick = highScore;
 
 clearScoresBtn.onclick = clearHighScores;
