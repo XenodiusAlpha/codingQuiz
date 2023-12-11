@@ -8,10 +8,11 @@ let currentIndex = 0;
 let answers = document.getElementById("choice");
 let timerEl = document.getElementById("timer");
 let timeLeft = 75;
-let gameEl = document.getElementById("game");
+let startScreenEL = document.getElementById("startScreen");
+// let gameEl = document.getElementById("game");
 let highScoresEl = document.getElementById("highScores")
 let finalScoreEl = document.getElementById("finalScore");
-
+let navHeaderEL = document.getElementById("navHeader");
 let quizBlockEl = document.getElementById("quizBlock");
 let endGameBlockEL = document.getElementById("endGameBlock");
 
@@ -19,7 +20,7 @@ let endGameBlockEL = document.getElementById("endGameBlock");
 function startQuiz(){
     promptData();
     countdownTimer();
-    startBtn.classList.add("displayNone");
+    startScreenEL.classList.add("displayNone");
 }
 // This is to get the data from questions.js
 function promptData(){
@@ -74,21 +75,26 @@ function checkAnswer (event){
 function countdownTimer() {
     var timeInterval = setInterval(function () {
         timeLeft--;
-        timerEl.textContent = `Time: ${timeLeft}`;
     
-      if(timeLeft <= 0 || currentIndex === 4) {
+      if(timeLeft <= 0 || currentIndex >= 4) {
         clearInterval(timeInterval);
       }
+      timerEl.textContent = `Time: ${timeLeft}`;
     }, 1000);
   }
 
 function endGame() {
-    gameEl.classList.add("displayNone");
+    // gameEl.classList.add("displayNone");
+    timerEl.textContent = `Time: ${timeLeft}`;
+    quizBlockEl.classList.add("displayNone");
     endGameBlockEL.classList.remove("displayNone");
     finalScoreEl.textContent = `Your final score is ${timeLeft}`;
+    
 }
 
 function highScore() {
+    navHeaderEL.classList.add("displayNone");
+    endGameBlockEL.classList.add("displayNone");
     highScoresEl.classList.remove("displayNone");
     console.log(timeLeft);
 }
@@ -96,8 +102,8 @@ function highScore() {
 function returnToGame() {
     console.log("btn works");
     quizBlockEl.classList.add("displayNone");
-    startBtn.classList.remove("displayNone");
-    gameEl.classList.remove("displayNone");
+    startScreenEL.classList.remove("displayNone");
+    navHeaderEL.classList.remove("displayNone");
     highScoresEl.classList.add("displayNone");
     resetVariables();
 }

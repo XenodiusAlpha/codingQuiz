@@ -7,22 +7,32 @@
     <link rel="stylesheet" href="./CSS/styles.css">
 </head>
 <body>
-    <div id="game">
-        <div class="header">
+    <header>
+        <nav id="navHeader">
             <ul>
                 <li id="viewHighScores">View High Scores</li>
                 <li id="timer">Time: 75</li>
             </ul>
+        </nav>
+    </header>
+    <section>
+        <div id="startScreen">
+            <h2>Coding Quiz Challenge</h2>
+            <p>
+                Try to answer the following code-related questions within the time limit.
+                Keep in mind that incorrect answers will penalize your score/time
+                by ten seconds!
+            </p>
+            <button id="start">Start</button>
         </div>
-        
+    </section>
+    <section id="game">
         <div id="quizBlock">
             <div id="questionTitle"></div>
             <div id="choice" class="choice"></div>
             <div id="result" class="result hide"></div>
         </div>    
-
-        <button id="start">Start</button>
-    </div>
+    </section>
     
     <div class="displayNone" id="endGameBlock">
         <h2>All Done!</h2>
