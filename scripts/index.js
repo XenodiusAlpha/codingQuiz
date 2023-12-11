@@ -2,20 +2,20 @@ let startBtn = document.getElementById("start");
 let goBackBtn = document.getElementById("goBack");
 let submitScoreBtn = document.getElementById("submitScore");
 let clearScoresBtn = document.getElementById("clearScores");
-
+let initialsEl = document.getElementById("initials");
 let results = document.getElementById("result");
 let currentIndex = 0;
 let answers = document.getElementById("choice");
 let timerEl = document.getElementById("timer");
 let timeLeft = 75;
 let startScreenEL = document.getElementById("startScreen");
-// let gameEl = document.getElementById("game");
 let highScoresEl = document.getElementById("highScores")
 let finalScoreEl = document.getElementById("finalScore");
 let navHeaderEL = document.getElementById("navHeader");
 let quizBlockEl = document.getElementById("quizBlock");
 let endGameBlockEL = document.getElementById("endGameBlock");
-
+let scoresListEl = document.getElementById("scoresList");
+let viewHighScoresEl = document.getElementById("viewHighScores");
 
 function startQuiz(){
     promptData();
@@ -78,25 +78,29 @@ function countdownTimer() {
     
       if(timeLeft <= 0 || currentIndex >= 4) {
         clearInterval(timeInterval);
+        endGame();
       }
       timerEl.textContent = `Time: ${timeLeft}`;
     }, 1000);
   }
 
 function endGame() {
-    // gameEl.classList.add("displayNone");
     timerEl.textContent = `Time: ${timeLeft}`;
     quizBlockEl.classList.add("displayNone");
     endGameBlockEL.classList.remove("displayNone");
     finalScoreEl.textContent = `Your final score is ${timeLeft}`;
-    
 }
 
 function highScore() {
+    startScreenEL.classList.add("displayNone");
     navHeaderEL.classList.add("displayNone");
     endGameBlockEL.classList.add("displayNone");
     highScoresEl.classList.remove("displayNone");
-    console.log(timeLeft);
+    if(scoresListEl.textContent === ""){
+        scoresListEl.textContent = "No high scores.";
+    } else {
+    scoresListEl.textContent = `1 : ${localStorage.getItem("userInitials")} - ${localStorage.getItem("hiScore")}`;
+    }
 }
 
 function returnToGame() {
@@ -114,14 +118,24 @@ function resetVariables() {
     currentIndex = 0;
     results.textContent = "";
 }
-// Need to attach timer ID to javascript
-// Make the time count down
-// Add a function that end the game
-// Add function that save the score to local storage
-// Save Highscore
-// Need to know if it's the end of the page
 
-submitScoreBtn.onclick = highScore;
+function saveHighScore() {
+    localStorage.setItem("userInitials", initialsEl.value);
+    localStorage.setItem("hiScore", timeLeft);
+    highScore();
+}
+
+function clearHighScores() {
+    localStorage.removeItem("userInitials");
+    localStorage.removeItem("hiScore");
+    scoresListEl.textContent = "No high scores.";
+}
+
+viewHighScoresEl.onclick = highScore;
+
+clearScoresBtn.onclick = clearHighScores;
+
+submitScoreBtn.onclick = saveHighScore;
 
 goBackBtn.onclick = returnToGame;
 
