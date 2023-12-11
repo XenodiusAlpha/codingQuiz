@@ -10,47 +10,52 @@
     <header>
         <nav id="navHeader">
             <ul>
-                <li id="viewHighScores">View High Scores</li>
+                <li class="viewHighScores" id="viewHighScores">View High Scores</li>
                 <li id="timer">Time: 75</li>
             </ul>
         </nav>
     </header>
-    <section>
-        <div id="startScreen">
-            <h2>Coding Quiz Challenge</h2>
-            <p>
-                Try to answer the following code-related questions within the time limit.
-                Keep in mind that incorrect answers will penalize your score/time
-                by ten seconds!
-            </p>
-            <button id="start">Start</button>
-        </div>
-    </section>
-    <section id="game">
-        <div id="quizBlock">
-            <div id="questionTitle"></div>
-            <div id="choice" class="choice"></div>
-            <div id="result" class="result hide"></div>
-        </div>    
-    </section>
-    
-    <div class="displayNone" id="endGameBlock">
-        <h2>All Done!</h2>
-        <p id="finalScore"></p>
-        <div class="userInitials">
-            <label for="initials">Enter initials:</label>
-            <input type="text" id="initials" name="initials" required />
-            <button id="submitScore">Submit</button>
-        </div>
-    </div>
-
-    <div class="displayNone" id="highScores">
-        <h1>High Scores</h1>
-        <p id="scoresList"></p>
-        <button id="goBack">Go back</button>
-        <button id="clearScores">Clear High Scores</button>
-    </div>
-    
+    <main>
+        <section>
+            <div class="startScreen" id="startScreen">
+                <h1>Coding Quiz Challenge</h1>
+                <p>
+                    Try to answer the following code-related questions within the time limit.
+                    Keep in mind that incorrect answers will penalize your score/time
+                    by ten seconds!
+                </p>
+                <button class="start" id="start">Start Quiz</button>
+            </div>
+        </section>
+        <section>
+            <div class="quizBlock" id="quizBlock">
+                <div class="questionTitle" id="questionTitle"></div>
+                <div id="choice" class="choice"></div>
+                <div id="result"></div>
+            </div>    
+        </section>
+        <section>
+            <div class="displayNone endGameBlock" id="endGameBlock">
+                <h2>All Done!</h2>
+                <p id="finalScore"></p>
+                <div class="userInitials">
+                    <label class="initialsLabel" for="initials">Enter initials:</label>
+                    <input class="textBox" type="text" id="initials" name="initials" required />
+                    <button class="submitScore" id="submitScore">Submit</button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="displayNone highScores" id="highScores">
+                <h2>High Scores</h2>
+                <p id="scoresList"></p>
+                <div>
+                    <button id="goBack">Go back</button>
+                    <button id="clearScores">Clear High Scores</button>
+                </div>
+            </div>
+        </section>
+    </main>  
 </body>
 <script src="./scripts/index.js"></script>
 <script src="./scripts/questionBank.js"></script>
