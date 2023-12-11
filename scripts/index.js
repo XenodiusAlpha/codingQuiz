@@ -6,6 +6,7 @@ let initialsEl = document.getElementById("initials");
 let results = document.getElementById("result");
 let currentIndex = 0;
 let answers = document.getElementById("choice");
+let timeInterval;
 let timerEl = document.getElementById("timer");
 let timeLeft = 75;
 let startScreenEL = document.getElementById("startScreen");
@@ -74,7 +75,7 @@ function checkAnswer (event){
 
 // function for the countdowm timer
 function countdownTimer() {
-    var timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         timeLeft--;
     
       if(timeLeft <= 0 || currentIndex === 5) {
@@ -97,11 +98,14 @@ function endGame() {
 function highScore() {
     startScreenEL.classList.add("displayNone");
     navHeaderEL.classList.add("displayNone");
+    quizBlockEl.classList.add("displayNone");
     endGameBlockEL.classList.add("displayNone");
     highScoresEl.classList.remove("displayNone");
     if(scoresListEl.textContent === ""){
         scoresListEl.textContent = "No high scores.";
     }
+    clearInterval(timeInterval);
+    resetVariables();
 }
 
 // function for the go back button
