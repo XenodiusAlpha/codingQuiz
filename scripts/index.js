@@ -60,7 +60,7 @@ function checkAnswer (event){
     }
     results.setAttribute('class', 'result');
     setTimeout(function () {
-        results.setAttribute('class', 'result hide');
+        results.setAttribute('class', 'result');
     }, 1000);
     currentIndex++;
 
@@ -77,7 +77,7 @@ function countdownTimer() {
     var timeInterval = setInterval(function () {
         timeLeft--;
     
-      if(timeLeft <= 0 || currentIndex >= 4) {
+      if(timeLeft <= 0 || currentIndex === 5) {
         clearInterval(timeInterval);
         endGame();
       }
@@ -101,8 +101,6 @@ function highScore() {
     highScoresEl.classList.remove("displayNone");
     if(scoresListEl.textContent === ""){
         scoresListEl.textContent = "No high scores.";
-    } else {
-    scoresListEl.textContent = `1 : ${localStorage.getItem("userInitials")} - ${localStorage.getItem("hiScore")}`;
     }
 }
 
@@ -127,6 +125,7 @@ function resetVariables() {
 function saveHighScore() {
     localStorage.setItem("userInitials", initialsEl.value);
     localStorage.setItem("hiScore", timeLeft);
+    scoresListEl.textContent = `1 : ${localStorage.getItem("userInitials")} - ${localStorage.getItem("hiScore")}`;
     highScore();
 }
 
